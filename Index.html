@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You Box</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .box {
+            padding: 20px;
+            border: 2px solid #000;
+            text-align: center;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-no {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <p>I love you</p>
+    <div class="button-container">
+        <button class="btn btn-yes" onclick="showLove()">Yes</button>
+        <button class="btn btn-no" onmouseover="moveButton(this)" onclick="handleNoClick()">No</button>
+    </div>
+</div>
+
+<script>
+    let noClickCount = 0;
+
+    function showLove() {
+        window.open('https://youtube.com/shorts/kz7atI5rJV0?si=WYa1Y-VV_ZjTgLje', '_blank');
+    }
+
+    function handleNoClick() {
+        noClickCount++;
+        if (noClickCount >= 3) {
+            window.open('https://youtu.be/AF8m2I1lU2I?si=3PHCr-B4J3-S5HUP', '_blank');
+        }
+    }
+
+    function moveButton(button) {
+        const box = document.querySelector('.box');
+        const boxRect = box.getBoundingClientRect();
+        const btnRect = button.getBoundingClientRect();
+        
+        const offsetX = (Math.random() - 0.5) * 200;
+        const offsetY = (Math.random() - 0.5) * 200;
+
+        let newLeft = btnRect.left + offsetX;
+        let newTop = btnRect.top + offsetY;
+
+        if (newLeft < boxRect.left || newLeft + btnRect.width > boxRect.right) {
+            newLeft = boxRect.left + (Math.random() * (boxRect.width - btnRect.width));
+        }
+
+        if (newTop < boxRect.top || newTop + btnRect.height > boxRect.bottom) {
+            newTop = boxRect.top + (Math.random() * (boxRect.height - btnRect.height));
+        }
+
+        button.style.position = 'absolute';
+        button.style.left = `${newLeft - boxRect.left}px`;
+        button.style.top = `${newTop - boxRect.top}px`;
+    }
+</script>
+
+</body>
+</html>
